@@ -32,6 +32,9 @@ var A = {x:1,y:1}, B = {x:1,y:1,z:1};
 console.log(Point2D.length(A), Point3D.length(B));
 ```
 
+Such code is easy to rewrite into C (omit the global object `var ABC = {};`, change function names from `ABC.xyz` to `ABC_xyz`). 
+Objects can be `struct`s. They never have methods.
+
 ## Prototypes
 
 You should be familiar with prototype-based programming, at least to a degree to understand the following code:
