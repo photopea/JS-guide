@@ -98,5 +98,5 @@ var points = new Float32Array(60);  for(var i=0; i<30; i++) {  points[2*i]=i;  p
 function print(k) {  console.log(points[2*k], points[2*k+1]);  }
 ```
 
-The flat representation needs less memory and is easier to collect by GC (as there are not as many "pointers").
+The flat representation needs less memory and is easier to collect by GC (as there is only one JS object).
 Such flat list of objects is processed faster (as there are usually less jumps in memory).
