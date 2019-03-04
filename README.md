@@ -79,10 +79,21 @@ var points = [];  for(var i=0; i<30; i++) points.push( {x:i, y:3+2*i} );
 function print(k) {  console.log(points[k].x, points[k].y);  }
 ```
 
+```js
+var points = [];  for(var i=0; i<30; i++) points.push( [i, 3+2*i] );
+function print(k) {  console.log(points[k][0], points[k][1]);  }
+```
+
 When there are thousands or millions of such objects, we represent them in a "flat" array (typed array)
 
 ```js
 var points = [];  for(var i=0; i<30; i++) points.push( i, 3+2*i );
 function print(k) {  console.log(points[2*k], points[2*k+1]);  }
 ```
+```js
+var points = new Float32Array(60);  for(var i=0; i<30; i++) {  points[2*i]=i;  points[2*i+1]=3+2*i;  }
+function print(k) {  console.log(points[2*k], points[2*k+1]);  }
+```
 
+The flat representation needs less memory and is easier to collect by GC (as there are not as many "pointers").
+Such flat list of objects is processed faster (as there are usually less jumps in memory).
