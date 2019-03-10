@@ -100,3 +100,34 @@ function print(k) {  console.log(points[2*k], points[2*k+1]);  }
 
 The flat representation needs less memory and is easier to collect by GC (as there is only one JS object).
 Such flat list of objects is processed faster (as there are usually less jumps in memory).
+
+## Local HTTP server
+
+To test your code locally, and let it load local files over HTTP protocol, you need a local HTTP server. Using it is easier than it sounds. Here is how to do it on Windows.
+
+Download NGIX from `http://nginx.org/en/download.html` . Unzip it, open the `conf/nginx.conf` and replace its content with following:
+
+```
+worker_processes  1;
+events {
+    worker_connections  1024;
+}
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+    server {
+        listen       8887;
+        server_name  http://127.0.0.1;
+        location / {
+            root   C:/Desktop/.....;
+        }
+    }
+}
+```
+- replace the `C:/Desktop/.....` with the directory, that should be accessible from a browser
+- double-click the `nginx.exe` to start it. It will run in a background, using 1 MB of RAM 
+- you can view `C:/Desktop/XYZ/file.html` by navigating to `http://127.0.0.1:8887/file.html` in any browser
+
+
