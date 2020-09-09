@@ -13,7 +13,6 @@ We try to avoid syntactic sugar. We always follow these rules when writing code:
 - use `"hi"` instead of `'hi'` (quotation marks for strings)
 - use `==` instead of `===` (compare only values with the same data type) 
 - use `null` instead of `undefined`
-- never define a function inside another function
 
 ## Static functions
 
