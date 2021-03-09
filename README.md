@@ -64,6 +64,44 @@ var A = new Point2D(1,1), B = new Point3D(1,1,1);
 console.log(A.length(), B.length());
 ```
 
+## Anonymous Functions
+
+Let's say we want to have an array A of all primes between 0 and 1000. We can use a following code.
+
+```js
+var A = [];
+for(var i=2; i<1000; i++) {
+    var prime=true;  for(var j=2; j<i-1; j++) if((i%j)==0) prime=false;
+    if(prime) A.push(i);
+}
+```
+When the code finishes, the the environment is "polluted" with variables A, i, j, prime. We can improve it.
+
+```js
+var getPrimes = function() {
+  var pr = [];
+  for(var i=2; i<1000; i++) {
+      var prime=true;  for(var j=2; j<i-1; j++) if((i%j)==0) prime=false;
+      if(prime) pr.push(i);
+  }
+  return pr;
+}
+var A = getPrimes();
+```
+But still, the environment is polluted with variables A and getPrimes. It can be done better:
+
+```js
+var A = function() {
+  var pr = [];
+  for(var i=2; i<1000; i++) {
+      var prime=true;  for(var j=2; j<i-1; j++) if((i%j)==0) prime=false;
+      if(prime) pr.push(i);
+  }
+  return pr;
+} ();
+```
+The function is called right after being defined. It does not have a name, so it can not be called from any other part of code. Only a variable A (array of primes) is defined in the environment after the execution.
+
 ## Typed Arrays
 
 You should be familiar with [Typed Arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays), 
